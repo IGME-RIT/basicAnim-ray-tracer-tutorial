@@ -6,22 +6,28 @@ to a different version of the Windows SDK. If you do not
 have any version of the Windows SDK, it can be installed
 from the Visual Studio Installer Tool
 
-Welcome to the Render Tutorial!
-Prerequesites: AVI Movie
+Welcome to the Basic Animation Tutorial!
+Prerequesites: Set FPS Tutorial
 
-This tutorial does not depend on the previous tutorial with compute shaders.
-Here, we set the Frame Rate and the duration (in seconds) of the final video,
-rather than setting a number of frames that are locked at 60 FPS. All changes
-are in Main.cpp
+In this tutorial, we create a new uniform to send the 
+total elapsed time to the Fragment shader. In the 
+fragment shader, we move the light and the cube around
+the scene.
 
-Near the top of the page, we add the variables videoFPS and videoSeconds,
-these are the FPS and duration of the final video, while the variables called
-"fps" and "totalTime" are related to the time of the program's duration, and
-the number of frames that are rendered per second. Don't get confused by those
+Every time the fragment shader begins, the light and 
+cube are automatically moved back to their original positions,
+because changes in the arrays (lights and triangles) are
+not saved in any way. Then, every time a pixel is
+processed, the new position of the light and the new
+position of every vertex of every triangle of the cube 
+need to be calculated. These calculations are in void main()
+of the fragment shader.
 
-Maximum number of frames will be equal to videoFPS x videoSeconds
+In the future, we will use a compute shader to calculate the
+positions (and rotations, and scales) one time per frame, and
+then the fragment shader will get an array of triangles from
+the compute shader, then the fragment shader will use that array
+of triangles (and lights).
 
-Near the end of the tutorial (last few lines in main.cpp), we use sprintf to 
-modify the command that we use to generate the AVI video from PNG 
-images. The only variable we modify is the frame rate of the video, but
-plenty more can be modified if someody ever wanted to
+That way, the calculations are done once per frame, rather than
+thousands of times per frame (once per pixel).
