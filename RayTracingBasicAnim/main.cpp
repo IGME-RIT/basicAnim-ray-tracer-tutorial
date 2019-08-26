@@ -172,7 +172,7 @@ void renderScene()
 	// duration than the actual rendered video, keep that in mind while testing
 
 	float totalTimeElapsedInVideo = (float)totalFrame / videoFPS;
-	float totalTimeElapsedInProgram = totalTime;
+	float totalTimeElapsedInProgram = (float)totalTime;
 
 	// send total amount of time to the GLSL shader
 	glUniform1f(time_loc, totalTimeElapsedInVideo);
